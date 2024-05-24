@@ -1,0 +1,113 @@
+{
+    "caption_cfg": {
+        "beam_size": 1,
+        "cls_token": 101,
+        "decode_mode": "greedy",
+        "eos_token": 102,
+        "mask_token": 103,
+        "max_generation_len": 30,
+        "toker": "./output/pretrained_weights/bert/bert-base-uncased-vocab.txt"
+    },
+    "checkpoint": null,
+    "data_cfg": {
+        "ann_path": "/PATH/datasets/MSRVTT/answer_candidate_full.json",
+        "datatype": "video",
+        "epoch": 5,
+        "max_txt_len": 30,
+        "n_workers": 10,
+        "name": "msrvtt",
+        "test_ids_path": "/PATH/datasets/MSRVTT/msrvtt/msrvtt_qa_test.pkl",
+        "tokenizer": {
+            "multi_encoder": "bert_tokenizer",
+            "txt_encoder": "clip_tokenizer"
+        },
+        "train_ids_path": "/PATH/datasets/MSRVTT/msrvtt/msrvtt_qa_train.pkl",
+        "train_total_batch_size": 64,
+        "val_total_batch_size": 64,
+        "video_path": "/PATH/datasets/MSRVTT/msrvtt/all"
+    },
+    "eval_vqa": true,
+    "finetune_task": "",
+    "finetune_task_name": "vqa",
+    "first_eval": true,
+    "local_rank": 0,
+    "losses": {
+        "mask_prob": 0.99,
+        "mask_token": 103
+    },
+    "multi_encoder": {
+        "bert_config": "./output/pretrained_weights/bert/bert-base-uncased.json",
+        "ensemble_type": "scale_share_sum",
+        "match_neg_prob": 0.5,
+        "multi_cross": 2,
+        "multi_type": "bert",
+        "multimodal_dim": 768,
+        "pretrained": "./output/pretrained_weights/bert/bert-base-uncased.bin",
+        "vocab_size": 30522
+    },
+    "optimizer": {
+        "betas": [
+            0.9,
+            0.98
+        ],
+        "fp16": true,
+        "grad_norm": 2.0,
+        "gradient_accumulation_steps": 1,
+        "learning_rate": 2e-05,
+        "num_train_steps": 11646,
+        "optim": "adamw",
+        "scheduler": "warmup_linear",
+        "seed": 60,
+        "vision_lr": 5e-07,
+        "warmup_ratio": 0.01,
+        "weight_decay": 0.01
+    },
+    "return_all_text": false,
+    "schedule": {
+        "evaluate_epoch": 1,
+        "use_validate": true
+    },
+    "submit_file": false,
+    "txt_encoder": {
+        "proj_dim": 768,
+        "txt_dim": 768
+    },
+    "video_cfg": {
+        "mean": [
+            0.48145466,
+            0.4578275,
+            0.40821073
+        ],
+        "resolution": 224,
+        "sample_num": 8,
+        "std": [
+            0.26862954,
+            0.26130258,
+            0.27577711
+        ],
+        "test_sample_num": 12,
+        "train_sample_num": 8
+    },
+    "vision_encoder": {
+        "adapt_cls_dim": 512,
+        "adapt_order": "adapt_first",
+        "adapt_patch_dim": 512,
+        "adaptor": [
+            false,
+            false
+        ],
+        "grad_checkpointing": true,
+        "pretrained": {
+            "clip1": "./output/pretrained_weights/clip/ViT-L-14-336px.pt",
+            "video_adapter_clip2": "./output/pretrained_weights/mf_clip/pretrain-webvid10m-va-512-512-last4-parallel_large_stage2_5witer/ckpt/model_opt.pth"
+        },
+        "proj_dim": 768,
+        "start_adapt_layer": 7,
+        "video_dim": 1024,
+        "vision_type": "cb_clip"
+    },
+    "vision_encoder.diff_view": false,
+    "vision_encoder.frozen_vision": false,
+    "vqa_type": "generate",
+    "zero_shot": false
+}

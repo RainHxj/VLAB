@@ -1,0 +1,14 @@
+{
+    "input_json": "/storage-root/multimodal-pretrain/cc12m/cc12m_en.txt",
+    "output": "/storage-root/multimodal-pretrain/baidu_data_1000w",
+    "toker": "bert-base-cased-vocab.txt",
+    "tokenizer": "bert-base-cased-vocab.txt",
+    "UNK": 100,
+    "CLS": 101,
+    "SEP": 102,
+    "MASK": 103,
+    "v_range": [
+        106,
+        30522
+    ]
+}

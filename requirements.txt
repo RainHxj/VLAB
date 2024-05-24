@@ -1,0 +1,9 @@
+tqdm
+toolz
+pytorch_pretrained_bert
+tensorboardX
+ipdb
+matplotlib
+av
+opencv-python-headless
+gpustat

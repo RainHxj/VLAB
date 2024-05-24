@@ -1,0 +1,100 @@
+{
+    "local_rank": 0,
+    "checkpoint": null,
+    "zero_shot": false,
+    "return_all_text": false,
+    "first_eval": true,
+    "finetune_task": "",
+    "submit_file": false,
+    "vision_encoder.frozen_vision": false,
+    "vision_encoder.diff_view": false,
+    "finetune_task_name": "retrieval",
+    "video_cfg": {
+        "sample_num": 8,
+        "test_sample_num": 18,
+        "resolution": 224,
+        "mean": [
+            0.48145466,
+            0.4578275,
+            0.40821073
+        ],
+        "std": [
+            0.26862954,
+            0.26130258,
+            0.27577711
+        ]
+    },
+    "schedule": {
+        "use_validate": true,
+        "evaluate_epoch": 10
+    },
+    "optimizer": {
+        "learning_rate": 5e-05,
+        "vision_lr": 5e-07,
+        "optim": "adamw",
+        "betas": [
+            0.9,
+            0.98
+        ],
+        "weight_decay": 0.01,
+        "grad_norm": 2.0,
+        "warmup_ratio": 0.1,
+        "scheduler": "warmup_linear",
+        "seed": 60,
+        "fp16": true,
+        "gradient_accumulation_steps": 1
+    },
+    "vision_encoder": {
+        "vision_type": "cb_clip",
+        "pretrained": {
+            "clip1": "./output/pretrained_weights/clip/ViT-L-14-336px.pt",
+            "video_adapter_clip2": "./output/pretrained_weights/mf_clip/pretrain-webvid10m-va-512-512-last4-parallel_large_stage2_5witer/ckpt/model_opt.pth"
+        },
+        "video_dim": 1024,
+        "proj_dim": 768,
+        "adaptor": [
+            false,
+            false
+        ],
+        "grad_checkpointing": true,
+        "start_adapt_layer": 7,
+        "adapt_cls_dim": 512,
+        "adapt_patch_dim": 512,
+        "adapt_order": "adapt_first"
+    },
+    "txt_encoder": {
+        "txt_dim": 768,
+        "proj_dim": 768
+    },
+    "multi_encoder": {
+        "multi_type": "bert",
+        "bert_config": "./output/pretrained_weights/bert/bert-base-uncased.json",
+        "pretrained": "./output/pretrained_weights/bert/bert-base-uncased.bin",
+        "multimodal_dim": 768,
+        "vocab_size": 30522,
+        "match_neg_prob": 0.5,
+        "multi_cross": 2,
+        "ensemble_type": "scale_share_sum"
+    },
+    "losses": {
+        "mask_prob": 0.15,
+        "mask_token": 103
+    },
+    "data_cfg": {
+        "name": "msvd",
+        "video_path": "/PATH/datasets/ds_datasets/msvd/all",
+        "train_ids_path": "/PATH/datasets/ds_datasets/msvd/train_anno_new.pkl",
+        "test_ids_path": "/PATH/datasets/ds_datasets/msvd/test_anno_new.pkl",
+        "train_total_batch_size": 64,
+        "val_total_batch_size": 256,
+        "epoch": 145,
+        "n_workers": 8,
+        "datatype": "video",
+        "max_txt_len": 30,
+        "tokenizer": {
+            "txt_encoder": "clip_tokenizer",
+            "multi_encoder": "bert_tokenizer"
+        },
+        "msvd_ret": true
+    }
+}
