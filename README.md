@@ -12,6 +12,8 @@ Unzip the weights under ```./output/pretrained_weights``` folder.
 
 Unzip the corresponding weights under ```./output/pretrain``` folder.
 
+All weights can be downloaded from https://huggingface.co/David-huang/VLAB
+
 3. For Testing
 
 Put the corresponding weights under ```./output/downstreams/{large, giant}``` folder.
